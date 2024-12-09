@@ -18,7 +18,7 @@ public class DipendenteRepository{
     }
 
     public void InserisciDipendente(Dipendente dipendente){
-        String sql = "INSERT INTO dipendenti VALUES (DEFAULT, ?,?,?,?)";
+        String sql = "INSERT INTO dipendenti (NOME,COGNOME,N_BADGE,RAL) VALUES (?,?,?,?)";
 
         jdbc.update(sql,dipendente.getNome(),dipendente.getCognome(),dipendente.getN_badge(),dipendente.getRal());
     }

@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -38,6 +39,13 @@ public class DipendenteRepository{
         };
 
         return jdbc.query(sql, dipendenteRowMapper);
+    }
+
+    public boolean EliminaDipendente(int numero_badge){
+
+        String sql = "DELETE FROM dipendenti WHERE n_badge = ?";
+
+        return jdbc.update(sql,numero_badge) == 1;
     }
 
 }

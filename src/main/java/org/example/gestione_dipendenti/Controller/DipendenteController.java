@@ -1,10 +1,7 @@
 package org.example.gestione_dipendenti.Controller;
 
 import org.example.gestione_dipendenti.Model.Repository.DipendenteRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.example.gestione_dipendenti.Model.Dipendente;
 
 import java.util.List;
@@ -26,6 +23,11 @@ public class DipendenteController {
     @PostMapping("/dipendente")
     public void aggiungiDipendente(@RequestBody Dipendente dipendente){
         this.dipendenteRepository.InserisciDipendente(dipendente);
+    }
+
+    @DeleteMapping("/dipendente/{n_badge}")
+    public boolean eliminaDipendente(@PathVariable("n_badge") int numero_badge){
+        return this.dipendenteRepository.EliminaDipendente(numero_badge);
     }
 
 

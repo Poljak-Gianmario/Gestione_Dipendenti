@@ -10,9 +10,11 @@
 <body class="bg-base-200 flex items-center justify-center min-h-screen">
 <div class="card w-96 bg-base-100 shadow-xl">
     <div class="card-body">
-        <h2 class="card-title text-2xl font-bold mb-6">Login</h2>
-        <p th:text="${message}"></p>
+
         <form action="/" method="post">
+
+            <h2 class="card-title text-2xl font-bold mb-6">Login</h2>
+            <p th:text="${message}"></p>
             <div class="form-control">
                 <label class="label">
                     <span class="label-text">Email</span>
@@ -31,7 +33,7 @@
                     <input type="password" class="grow" placeholder="Enter password" name="password"/>
                 </label>
                 <label class="label">
-                    <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                    <a href="#" class="label-text-alt link link-hover">Password dimenticata?</a>
                 </label>
             </div>
             <div class="form-control mt-6">
@@ -40,11 +42,14 @@
                 </button>
             </div>
         </form>
-        <div class="divider">OR</div>
-        <div class="text-center">
-            <p>Don't have an account?</p>
-            <a href="#" class="link link-primary">Sign up now</a>
-        </div>
+        <div class="divider">O</div>
+        <form action="/subscribe" method="get">
+            <div class="text-center">
+                <p>Non hai un account?</p>
+                <button class="link link-primary">Registrati</button>
+            </div>
+        </form>
+
     </div>
 </div>
 </body>

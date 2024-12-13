@@ -15,7 +15,7 @@ public class DipendenteController {
         this.dipendenteRepository = dipendenteRepository;
     }
 
-   @GetMapping("/dipendente")
+    @GetMapping("/dipendente")
     public List<Dipendente> prendiTutti(){
         return this.dipendenteRepository.Tutti();
     }

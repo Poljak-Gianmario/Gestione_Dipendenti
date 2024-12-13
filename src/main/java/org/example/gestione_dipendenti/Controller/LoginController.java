@@ -24,7 +24,7 @@ public class LoginController {
     @PostMapping("/")
     public String loginPost(@RequestParam String username, @RequestParam String password, Model model){
 
-        loginProcessor.setUsername(username);
+        loginProcessor.setEmail(username);
         loginProcessor.setPassword(password);
 
         boolean loggedIn = loginProcessor.login();
@@ -36,5 +36,7 @@ public class LoginController {
             return "login";
         }
     }
+
+
 
 }

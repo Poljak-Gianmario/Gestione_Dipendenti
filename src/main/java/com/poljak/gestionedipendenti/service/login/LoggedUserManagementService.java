@@ -1,4 +1,4 @@
-package org.example.gestione_dipendenti.Login;
+package com.poljak.gestionedipendenti.service.login;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

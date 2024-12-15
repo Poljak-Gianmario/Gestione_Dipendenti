@@ -1,14 +1,14 @@
-package org.example.gestione_dipendenti.Controller;
+package com.poljak.gestionedipendenti.controller;
 
-import org.example.gestione_dipendenti.Login.LoggedUserManagementService;
-import org.example.gestione_dipendenti.Model.Dipendente;
-import org.example.gestione_dipendenti.Service.LoginCountService;
+import com.poljak.gestionedipendenti.controller.api.DipendenteController;
+import com.poljak.gestionedipendenti.controller.general.UtenteController;
+import com.poljak.gestionedipendenti.service.login.LoggedUserManagementService;
+import com.poljak.gestionedipendenti.model.Dipendente;
+import com.poljak.gestionedipendenti.service.LoginCountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,12 +17,15 @@ public class MainController {
 
     private final LoggedUserManagementService loggedUserManagementService;
     private final DipendenteController dipendenteController;
+
+    private final UtenteController utenteController;
     private final LoginCountService loginCountService;
 
-    public MainController(LoggedUserManagementService loggedUserManagementService, DipendenteController dipendenteController, LoginCountService loginCountService){
+    public MainController(LoggedUserManagementService loggedUserManagementService, DipendenteController dipendenteController, LoginCountService loginCountService, UtenteController utenteController){
         this.loggedUserManagementService = loggedUserManagementService;
         this.dipendenteController = dipendenteController;
         this.loginCountService = loginCountService;
+        this.utenteController = utenteController;
     }
 
     @GetMapping("/main")
@@ -38,6 +41,7 @@ public class MainController {
             List<Dipendente> dipendenti = dipendenteController.prendiTutti();
             model.addAttribute("dipendenti", dipendenti);
             model.addAttribute("count", count);
+            model.addAttribute("nome", utenteController.getAzienda(loggedUserManagementService.getUsername()));
 
             return "home";
         }

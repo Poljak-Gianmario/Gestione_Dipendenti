@@ -1,4 +1,4 @@
-package org.example.gestione_dipendenti.Service;
+package com.poljak.gestionedipendenti.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;

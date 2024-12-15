@@ -1,8 +1,8 @@
-package org.example.gestione_dipendenti.Model.Repository;
+package com.poljak.gestionedipendenti.repository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import static org.example.gestione_dipendenti.Security.PasswordHash.hashPassword;
+import static com.poljak.gestionedipendenti.service.login.PasswordHashService.hashPassword;
 
 @Repository
 public class SubscribeRepository {

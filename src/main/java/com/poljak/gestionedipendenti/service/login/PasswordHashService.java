@@ -1,10 +1,8 @@
-package org.example.gestione_dipendenti.Security;
+package com.poljak.gestionedipendenti.service.login;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import static java.lang.System.err;
-
-public class PasswordHash {
+public class PasswordHashService {
 
     public static String hashPassword(String plainTextPassword){
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());

@@ -1,11 +1,10 @@
-package org.example.gestione_dipendenti.Login;
+package com.poljak.gestionedipendenti.model;
 
-import org.example.gestione_dipendenti.Model.Repository.LoginRepository;
-import org.example.gestione_dipendenti.Service.LoginCountService;
+import com.poljak.gestionedipendenti.service.login.LoggedUserManagementService;
+import com.poljak.gestionedipendenti.repository.LoginRepository;
+import com.poljak.gestionedipendenti.service.LoginCountService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
-import static org.example.gestione_dipendenti.Security.PasswordHash.hashPassword;
-
 
 
 @Component

@@ -1,4 +1,4 @@
-package org.example.gestione_dipendenti.Model;
+package com.poljak.gestionedipendenti.model;
 
 import jakarta.persistence.*;
 

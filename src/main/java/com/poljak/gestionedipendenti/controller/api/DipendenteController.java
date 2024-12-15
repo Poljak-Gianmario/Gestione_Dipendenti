@@ -1,8 +1,8 @@
-package org.example.gestione_dipendenti.Controller;
+package com.poljak.gestionedipendenti.controller.api;
 
-import org.example.gestione_dipendenti.Model.Repository.DipendenteRepository;
+import com.poljak.gestionedipendenti.repository.DipendenteRepository;
 import org.springframework.web.bind.annotation.*;
-import org.example.gestione_dipendenti.Model.Dipendente;
+import com.poljak.gestionedipendenti.model.Dipendente;
 
 import java.util.List;
 
@@ -21,14 +21,11 @@ public class DipendenteController {
     }
 
     @PostMapping("/dipendente")
-    public void aggiungiDipendente(@RequestBody Dipendente dipendente){
-        this.dipendenteRepository.InserisciDipendente(dipendente);
+    public void aggiungiDipendente(@RequestBody Dipendente dipendente){this.dipendenteRepository.InserisciDipendente(dipendente);
     }
 
     @DeleteMapping("/dipendente/{n_badge}")
-    public boolean eliminaDipendente(@PathVariable("n_badge") int numero_badge){
-        return this.dipendenteRepository.EliminaDipendente(numero_badge);
-    }
+    public boolean eliminaDipendente(@PathVariable("n_badge") int numero_badge){return this.dipendenteRepository.EliminaDipendente(numero_badge);}
 
 
 }

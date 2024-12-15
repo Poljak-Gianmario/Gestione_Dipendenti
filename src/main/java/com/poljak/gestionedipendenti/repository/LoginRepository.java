@@ -1,9 +1,9 @@
-package org.example.gestione_dipendenti.Model.Repository;
+package com.poljak.gestionedipendenti.repository;
 
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import static org.example.gestione_dipendenti.Security.PasswordHash.compareHash;
+import static com.poljak.gestionedipendenti.service.login.PasswordHashService.compareHash;
 
 @Repository
 public class LoginRepository {

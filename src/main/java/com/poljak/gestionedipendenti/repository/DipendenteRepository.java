@@ -1,11 +1,10 @@
-package org.example.gestione_dipendenti.Model.Repository;
+package com.poljak.gestionedipendenti.repository;
 
-import org.example.gestione_dipendenti.Model.Dipendente;
+import com.poljak.gestionedipendenti.model.Dipendente;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -18,7 +17,7 @@ public class DipendenteRepository{
     }
 
     public void InserisciDipendente(Dipendente dipendente){
-        String sql = "INSERT INTO dipendenti (NOME,COGNOME,N_BADGE,RAL) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO dipendenti (NOME,COGNOME,N_BADGE,RAL) VALUES (?,?,?,?,?)";
 
         jdbc.update(sql,dipendente.getNome(),dipendente.getCognome(),dipendente.getN_badge(),dipendente.getRal());
     }

@@ -1,7 +1,7 @@
-package org.example.gestione_dipendenti.Controller;
+package com.poljak.gestionedipendenti.controller.general;
 
-import org.example.gestione_dipendenti.Login.LoginProcessor;
-import org.example.gestione_dipendenti.Model.Repository.SubscribeRepository;
+import com.poljak.gestionedipendenti.model.LoginProcessor;
+import com.poljak.gestionedipendenti.repository.SubscribeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

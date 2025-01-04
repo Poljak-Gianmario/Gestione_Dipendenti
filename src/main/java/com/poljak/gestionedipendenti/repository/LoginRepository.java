@@ -16,9 +16,9 @@ public class LoginRepository {
 
     public boolean matchCredenziali(String email, String password) {
 
-        String retrive_email = "SELECT email FROM utenti WHERE email = ?" ;
+        String retrieveEmail = "SELECT email FROM utenti WHERE email = ?" ;
 
-        String r_email = jdbcTemplate.queryForObject(retrive_email, new Object[]{email}, String.class);
+        String r_email = jdbcTemplate.queryForObject(retrieveEmail, new Object[]{email}, String.class);
 
         if(r_email.isEmpty())
             return false;

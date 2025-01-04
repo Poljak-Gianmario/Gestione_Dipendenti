@@ -2,7 +2,6 @@ package com.poljak.gestionedipendenti.model;
 
 import com.poljak.gestionedipendenti.service.login.LoggedUserManagementService;
 import com.poljak.gestionedipendenti.repository.LoginRepository;
-import com.poljak.gestionedipendenti.service.LoginCountService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -16,12 +15,10 @@ public class LoginProcessor {
     private String password;
 
     private final LoggedUserManagementService loggedUserManagementService;
-    private final LoginCountService loginCountService;
     private final LoginRepository loginRepository;
 
-    public LoginProcessor(LoggedUserManagementService loggedUserManagementService, LoginCountService loginCountService, LoginRepository loginRepository) {
+    public LoginProcessor(LoggedUserManagementService loggedUserManagementService, LoginRepository loginRepository) {
         this.loggedUserManagementService = loggedUserManagementService;
-        this.loginCountService = loginCountService;
         this.loginRepository = loginRepository;
     }
 
@@ -44,7 +41,6 @@ public class LoginProcessor {
 
     public boolean login() {
 
-        loginCountService.increment();
         String username = this.getEmail();
         String password = this.getPassword();
 

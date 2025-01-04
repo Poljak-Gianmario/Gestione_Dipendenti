@@ -15,6 +15,13 @@ public class UtenteController {
 
     @GetMapping("/utente/azienda")
     public String getAzienda(String email){
-        return utenteRepository.getNome(email);
+        return utenteRepository.getAzienda(email);
     }
+
+    @GetMapping("/utente/id")
+    public int getId(String email){
+        return utenteRepository.getId(email);
+    }
+
+
 }

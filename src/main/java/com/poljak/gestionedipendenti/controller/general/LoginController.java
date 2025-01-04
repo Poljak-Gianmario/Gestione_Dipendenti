@@ -35,8 +35,7 @@ public class LoginController {
             model.addAttribute("message", "Login fallito");
             return "login";
         }
+
     }
-
-
 
 }

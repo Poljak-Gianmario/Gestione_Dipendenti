@@ -10,114 +10,76 @@
 
 
 </head>
-<body>
+<body class=" font-mono ">
 
-    <div class="navbar bg-base-100">
-        <div class="navbar-start">
-            <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                    <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                        <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h7" />
-                    </svg>
-                </div>
-                <ul
-                        tabindex="0"
-                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <form action="/logout">
-                        <li><button>Logout</button></li>
-                    </form>
-
-                </ul>
-            </div>
+    <div class="navbar bg-primary">
+        <div class="flex-1 text-xl">
+            <a> Azienda: </a> <p th:text="${nome}"> </p>
         </div>
-        <div class="navbar-center">
-            <a class="text-xl">Portale gestione <p th:text="${nome}"> </p></a>
-        </div>
-
-        <div class="navbar-end">
-            <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                    <div class="w-10 rounded-full">
-                        <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                    </div>
-                </div>
-                <ul
-                        tabindex="0"
-                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li>
-                        <a class="justify-between">
-                            Profilo
-                            <span class="badge">New</span>
-                        </a>
-                    </li>
-                    <li><a>Impostazioni</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
+        <div class="flex space-x-4 ...">
+            <div>
+                <a href="/swagger-ui/index.html"> <button class="btn btn-secondary">Documentazione API</button> </a>
             </div>
-
+            <div>
+                <a href="/main/logout" class="btn">Logout</a>
+            </div>
         </div>
     </div>
 
-    </div>
-
-    <div class="overflow-x-auto ">
+    <div class="overflow-x-auto p-10">
         <table class="table">
-            <!-- head -->
+
             <thead>
             <tr>
-                <th>
-                    <label>
-                        <input type="checkbox" class="checkbox" />
-                    </label>
-                </th>
                 <th>Nome</th>
+                <th>Cognome</th>
                 <th>Numero badge</th>
                 <th>RAL</th>
                 <th></th>
             </tr>
             </thead>
+
             <tbody>
-            <!-- row 1 -->
-            <tr>
-                <th>
-                    <label>
-                        <input type="checkbox" class="checkbox" />
-                    </label>
-                </th>
-                <td>
-                    <div class="flex items-center gap-3">
-                        <div class="avatar">
-                            <div class="mask mask-squircle h-12 w-12">
-                                <img
-                                        src="https://picsum.photos/200/300"
-                                        alt="Avatar Tailwind CSS Component" />
-                            </div>
-                        </div>
-                        <div>
-                            <div class="font-bold">Hart Hagerty</div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    Zemlak, Daniel and Leannon
-                </td>
-                <td>Purple</td>
 
-
+            <tr th:each="dipendente: ${dipendenti}">
+                    <td th:text="${dipendente.getNome()}"></td>
+                    <td th:text="${dipendente.getCognome()}"></td>
+                    <td th:text="${dipendente.getN_badge()}"></td>
+                    <td th:text="${dipendente.getRal()}"></td>
             </tr>
+
             </tbody>
         </table>
+
+    </div>
+
+
+    <div class="grid grid-rows-5 grid-flow-col gap-4">
+
+        <form action="#" th:action="@{/main}" th:object="${dipendente}" method="post">
+            <div>
+                <input name="nome" type="text" th:field="*{nome}" placeholder="Nome" class="input input-bordered w-full max-w-xs" />
+                <input name="cognome" type="text" th:field="*{cognome}" placeholder="Cognome" class="input input-bordered w-full max-w-xs" />
+                <input name="n_badge" type="text" th:field="*{n_badge}" placeholder="Numero badge" class="input input-bordered w-full max-w-xs" />
+                <input name="ral" type="text" th:field="*{ral}" placeholder="RAL" class="input input-bordered w-full max-w-xs" />
+                <button class="btn btn-success">Aggiungi dipendente</button>
+            </div>
+        </form>
+
+
+        <form action="main/delete" th:method="DELETE">
+
+            <div>
+                <input name="n_badge" type="text" placeholder="Numero badge" class="input input-bordered w-full max-w-xs" />
+                <button class="btn btn-active btn-accent">Elimina dipendente</button>
+            </div>
+        </form>
+
+        <div role="alert" class="alert">
+            <span>RISULTATO OPERAZIONE: <h2 th:text="${message}"></h2> </span>
+        </div>
+
+
     </div>
 
 </body>

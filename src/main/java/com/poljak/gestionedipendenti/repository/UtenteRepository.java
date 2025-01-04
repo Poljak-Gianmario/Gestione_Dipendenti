@@ -11,13 +11,18 @@ public class UtenteRepository {
     public UtenteRepository(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
-    public String getNome(String email){
+    public String getAzienda(String email){
 
         String sql = "SELECT azienda FROM utenti WHERE email = ?";
 
-        String azienda = (String) jdbcTemplate.queryForObject(sql, new Object[] {email}, String.class);
+        return jdbcTemplate.queryForObject(sql, new Object[] {email}, String.class);
+    }
 
-        return azienda;
+    public int getId(String email){
+
+        String sql = "SELECT id FROM utenti WHERE email = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[] {email}, Integer.class);
     }
 
 

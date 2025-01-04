@@ -15,6 +15,10 @@ public class Dipendente {
     private int n_badge;
     private int ral;
 
+
+
+    private int id_utente;
+
     public Long getId() {
         return id;
     }
@@ -22,9 +26,6 @@ public class Dipendente {
     public void setId(Long id) {
         this.id = id;
     }
-
-
-
 
     public String getNome() {
         return nome;
@@ -57,6 +58,11 @@ public class Dipendente {
     public void setRal(int ral) {
         this.ral = ral;
     }
+
+    public int getId_utente() { return id_utente; }
+
+    public void setId_utente(int id_utente) { this.id_utente = id_utente; }
+
 
 
 

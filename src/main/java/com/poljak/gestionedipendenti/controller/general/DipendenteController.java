@@ -19,7 +19,13 @@ public class DipendenteController {
 
     @PostMapping
     public boolean aggiungiDipendente(Dipendente dipendente, String email){
-        return dipendenteService.aggiungiDipendente(dipendente,email);
+
+        try{
+            return dipendenteService.aggiungiDipendente(dipendente,email);
+        }catch (Exception e){
+          return false;
+        }
+
     }
 
     @GetMapping

@@ -4,8 +4,10 @@ import com.poljak.gestionedipendenti.controller.general.DipendenteController;
 import com.poljak.gestionedipendenti.controller.general.UtenteController;
 import com.poljak.gestionedipendenti.service.login.LoggedUserManagementService;
 import com.poljak.gestionedipendenti.model.Dipendente;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,34 +46,49 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String aggiungiDipendente(@ModelAttribute Dipendente dipendente, RedirectAttributes redirectAttrs){
+    public String aggiungiDipendente(@Valid @ModelAttribute Dipendente dipendente,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttrs) {
 
-        if(dipendenteController.aggiungiDipendente(dipendente,loggedUserManagementService.getUsername())){
+        if(bindingResult.hasErrors()){
+
+            redirectAttrs.addFlashAttribute("message", "Aggiunta fallita");
+            return "redirect:/main";
+
+        }
+
+        if(dipendenteController.aggiungiDipendente(dipendente,loggedUserManagementService.getUsername())) {
             redirectAttrs.addFlashAttribute("message", "Dipendente aggiunto con successo!");
         } else {
             redirectAttrs.addFlashAttribute("message", "Aggiunta fallita");
         }
 
-        return "redirect:/main";
+            return "redirect:/main";
+
     }
 
     @DeleteMapping("/main/delete")
-    public String eliminaDipendente(String n_badge, RedirectAttributes redirectAttrs){
+    public String eliminaDipendente(@RequestParam String n_badge,RedirectAttributes redirectAttrs){
 
-        if(n_badge.isEmpty()){
+        if (n_badge == null || n_badge.isEmpty()) {
             redirectAttrs.addFlashAttribute("message", "Inserisci un badge!");
-        }else{
+            return "redirect:/main";
+        }
 
+        try {
             int badge = Integer.parseInt(n_badge);
-            if(dipendenteController.eliminaDipendente(badge, loggedUserManagementService.getUsername())) {
+
+            if (dipendenteController.eliminaDipendente(badge, loggedUserManagementService.getUsername())) {
                 redirectAttrs.addFlashAttribute("message", "Dipendente eliminato con successo!");
-            }else {
+            } else {
                 redirectAttrs.addFlashAttribute("message", "Numero badge non trovato");
             }
-
+        } catch (NumberFormatException e) {
+            redirectAttrs.addFlashAttribute("message", "Il badge deve essere un numero valido");
         }
 
         return "redirect:/main";
+
     }
 
 

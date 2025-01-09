@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class SubscribeController {
@@ -25,14 +26,19 @@ public class SubscribeController {
     }
 
     @PostMapping("/subscribe")
-    public String subscribed(@RequestParam String email, @RequestParam String nome, @RequestParam String cognome,@RequestParam String azienda, @RequestParam String password){
+    public String subscribed(@RequestParam String email, @RequestParam String nome, @RequestParam String cognome,@RequestParam String azienda, @RequestParam String password, RedirectAttributes redirectAttrs){
 
-        subscribeRepository.aggiungiUtente(nome,cognome,email,password,azienda);
-        loginProcessor.setEmail(email);
-        loginProcessor.setPassword(password);
-        loginProcessor.login();
+        if(subscribeRepository.aggiungiUtente(nome,cognome,email,password,azienda)){
+            loginProcessor.setEmail(email);
+            loginProcessor.setPassword(password);
+            loginProcessor.login();
+            return "redirect:/main";
+        }
 
-        return "redirect:/main";
+        redirectAttrs.addFlashAttribute("message", "Email già presente!");
+
+        return "redirect:/subscribe";
+
     }
 
 }

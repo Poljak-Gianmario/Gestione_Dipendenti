@@ -1,5 +1,6 @@
 package com.poljak.gestionedipendenti.repository;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import static com.poljak.gestionedipendenti.service.login.PasswordHashService.hashPassword;
@@ -13,12 +14,28 @@ public class SubscribeRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void aggiungiUtente(String nome, String cognome, String email, String password,String azienda){
+    public boolean aggiungiUtente(String nome, String cognome, String email, String password,String azienda){
 
-        String hashPassword = hashPassword(password);
+        String verificaEmailQuery = "SELECT email FROM utenti WHERE email = ?";
 
-       String sql = "INSERT INTO utenti (nome,cognome,email,password,azienda) VALUES (?,?,?,?,?)";
-       jdbcTemplate.update(sql,nome,cognome,email,hashPassword,azienda);
+        try {
+
+            jdbcTemplate.queryForObject(verificaEmailQuery, new Object[]{email}, String.class);
+
+            return false;
+        } catch (EmptyResultDataAccessException e) {
+
+            String hashPassword = hashPassword(password);
+
+            String sql = "INSERT INTO utenti (nome, cognome, email, password, azienda) VALUES (?,?,?,?,?)";
+            jdbcTemplate.update(sql, nome, cognome, email, hashPassword, azienda);  // Insert the new user
+
+            return true;
+        }
+
+
+
+
     }
 
 

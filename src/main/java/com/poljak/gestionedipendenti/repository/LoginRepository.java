@@ -16,24 +16,19 @@ public class LoginRepository {
 
     public boolean matchCredenziali(String email, String password) {
 
-        String retrieveEmail = "SELECT email FROM utenti WHERE email = ?" ;
+        String retrieveEmailCount = "SELECT COUNT(*) FROM utenti WHERE email = ?";
 
-        String r_email = jdbcTemplate.queryForObject(retrieveEmail, new Object[]{email}, String.class);
+        int count = jdbcTemplate.queryForObject(retrieveEmailCount, new Object[]{email}, Integer.class);
 
-        if(r_email.isEmpty())
+        if(count == 0)
             return false;
-        else {
-            String retrive_password = "SELECT password FROM utenti WHERE email = ?" ;
 
-            String hashed = jdbcTemplate.queryForObject(retrive_password, new Object[]{email}, String.class);
+        String retrievePassword = "SELECT password FROM utenti WHERE email = ?" ;
 
-            if(compareHash(password,hashed))
-                return true;
+        String hashed = jdbcTemplate.queryForObject(retrievePassword, new Object[]{email}, String.class);
 
-        }
-        System.out.println("email:" + r_email + "password" + password);
+        return compareHash(password, hashed);
 
-        return false;
     }
 
 }
